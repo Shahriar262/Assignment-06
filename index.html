@@ -12,6 +12,15 @@
     />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
+    <!-- font awsome cdn -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
     <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -55,7 +64,9 @@
               <li><a>Plant a Tree</a></li>
             </ul>
           </div>
-          <a class="btn btn-ghost text-xl text-white ml-[-16px] md:ml-[90px]">Green Earth</a>
+          <a class="btn btn-ghost text-xl text-white ml-[-16px] md:ml-[90px]"
+            >Green Earth</a
+          >
         </div>
         <div class="navbar-center hidden md:flex">
           <ul class="menu menu-horizontal px-1">
@@ -65,22 +76,96 @@
           </ul>
         </div>
         <div class="navbar-end mr-1 md:mr-[105px]">
-          <a class="btn bg-yellow-400 rounded-3xl border-none text-green-800 hover:bg-yellow-200">Plant a Tree</a>
+          <a
+            class="btn bg-yellow-400 rounded-3xl border-none text-green-800 hover:bg-yellow-200"
+            >Plant a Tree</a
+          >
         </div>
       </div>
     </header>
 
     <main>
       <!-- Banner section starts here -->
-       <section class="relative bg-[#CFF0DC] text-white text-center py-20 overflow-hidden">
-         <h1 class="text-4xl font-bold text-black">Plant a Tree, Grow a Future</h1>
-         <p class="mt-4 text-gray-700">Join our mission to plant 1 million trees and make the Earth greener for future<br class="hidden md:inline"> generations.</p>
-         <button class="mt-6 bg-yellow-400 text-green-700 px-6 py-2 border-none rounded-3xl font-semibold hover:bg-yellow-200 cursor-pointer">Get Involved</button>
-         <img src="./assets/hero-leaf1.png" alt="" class="absolute bottom-0 left-0  w-32 md:w-[420px] h-24 md:h-[330px] pointer-events-none select-none" />
-         <img src="./assets/hero-leaf2.png" alt="" class="absolute bottom-0 right-0 w-32 md:w-[420px] h-24  md:h-[330px] pointer-events-none select-none" />
+      <section
+        class="relative bg-[#CFF0DC] text-white text-center py-20 overflow-hidden"
+      >
+        <h1 class="text-4xl font-bold text-black">
+          Plant a Tree, Grow a Future
+        </h1>
+        <p class="mt-4 text-gray-700">
+          Join our mission to plant 1 million trees and make the Earth greener
+          for future<br class="hidden md:inline" />
+          generations.
+        </p>
+        <button
+          class="mt-6 bg-yellow-400 text-green-700 px-6 py-2 border-none rounded-3xl font-semibold hover:bg-yellow-200 cursor-pointer"
+        >
+          Get Involved
+        </button>
+        <img
+          src="./assets/hero-leaf1.png"
+          alt=""
+          class="absolute bottom-0 left-0 w-32 md:w-[420px] h-24 md:h-[330px] pointer-events-none select-none"
+        />
+        <img
+          src="./assets/hero-leaf2.png"
+          alt=""
+          class="absolute bottom-0 right-0 w-32 md:w-[420px] h-24 md:h-[330px] pointer-events-none select-none"
+        />
+      </section>
 
-       </section>
+      <!-- card section -->
+      <section class="bg-[#f0fdf4]">
+        <div class="container w-11/12 mx-auto py-16 px-4">
+          <h3 class="text-2xl font-bold text-center mb-10">
+            Choose Your Trees
+          </h3>
+
+          <div
+            id="spinner"
+            class="flex justify-center items-center -mt-5 mb-4 hidden"
+          >
+            <span class="loading loading-dots loading-xl"></span>
+          </div>
+
+          <div class="grid grid-cols-12 gap-8">
+            <aside class="col-span-12 md:col-span-2 -mt-6 p-6 h-fit">
+              <h4 class="font-bold mb-2">Categories</h4>
+              <ul id="category-container" class="pl-2 text-gray-700"></ul>
+            </aside>
+
+            <div
+              id="plant-container"
+              class="col-span-12 md:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-6"
+            ></div>
+
+            
+            <div id="cart-container" class="bg-white p-4 rounded shadow-md col-span-12 md:col-span-2">
+              <h3 class="font-semibold mb-2">Your Cart</h3>
+              <ul id="cart-list" class="mb-2"></ul>
+              <div class="font-semibold mt-2 pt-2 border-t border-gray-300">
+                Total:<span id="cart-total" class="ml-28 md:ml-14"><i class="fa-solid fa-bangladeshi-taka-sign"></i>0</span>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Open the modal using ID.showModal() method -->
+      <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+          <div id="details-container" class="space-y-4"></div>
+          <div class="modal-action">
+            <form method="dialog">
+              <!-- if there is a button in form, it will close the modal -->
+              <button class="btn">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </main>
 
+    <script src="./scripts/index.js"></script>
   </body>
 </html>
