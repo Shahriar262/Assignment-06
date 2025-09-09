@@ -86,23 +86,23 @@ const displayPlantDetails = (plant) => {
   const detailsBox = document.getElementById("details-container");
   detailsBox.innerHTML = `
              <div>
-                <h2 class="text-2xl font-bold">${plant.name}</h2>
+                <h2 class="text-[20px] md:text-2xl font-bold">${plant.name}</h2>
              </div>
 
              <div>
-               <img src="${plant.image}" class="h-[250px] w-full object-cover object-center" alt="">
+               <img src="${plant.image}" class="h-[200px] md:h-[250px] w-full object-cover object-center" alt="">
              </div>
 
              <div>
-               <p><span class="font-bold">Category:</span> ${plant.category}</p>
+               <p class="text-[14px] md:text-[16px]"><span class="font-bold">Category:</span> ${plant.category}</p>
              </div>
 
              <div>
-               <p><span class="font-bold">Price:</span> <i class="fa-solid fa-bangladeshi-taka-sign"></i>${plant.price}</p>
+               <p class="text-[14px] md:text-[16px]"><span class="font-bold">Price:</span> <i class="fa-solid fa-bangladeshi-taka-sign"></i>${plant.price}</p>
              </div>
 
              <div>
-              <p><span class="font-bold">Description:</span> ${plant.description}</p>
+              <p class="text-[14px] md:text-[16px]><span class="font-bold">Description:</span> ${plant.description}</p>
              </div>
    `;
   document.getElementById("my_modal_5").showModal();
@@ -130,7 +130,7 @@ const showPlants = (plants) => {
         : plant.description;
 
     plantContainer.innerHTML += `
-    <div id="${plant.id}" class="bg-white shadow rounded-lg p-4 flex flex-col h-[380px]">
+    <div id="${plant.id}" class="bg-white w-[94%] mx-auto md:mx-0 md:w-full shadow rounded-lg p-4 flex flex-col h-[380px]">
 
                 <img src="${plant.image}" alt="" class="h-[150px] w-full object-cover rounded mb-4">
 
