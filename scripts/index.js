@@ -26,11 +26,21 @@ const showCategory = (categories) => {
         `;
   });
 
+  const allTreesBtn = document.getElementById('all-plants');
+  allTreesBtn.classList.add('bg-green-700', 'text-white');
+
   categoryContainer.addEventListener("click", (e) => {
     if (e.target.localName !== "li") return;
 
+
+
     const allLi = document.querySelectorAll("#category-container li");
-    allLi.forEach((li) => li.classList.remove("bg-green-800", "text-white"));
+    allLi.forEach((li) => {
+     
+    li.classList.remove("bg-green-700", "bg-green-800", "text-white");
+    });
+
+    
     e.target.classList.add("bg-green-800", "text-white");
 
     manageSpinner(true);
@@ -51,6 +61,7 @@ const showCategory = (categories) => {
   });
 };
 
+//spinner fucntionality
 const manageSpinner = (status) => {
   if (status == true) {
     document.getElementById("spinner").classList.remove("hidden");
@@ -61,6 +72,8 @@ const manageSpinner = (status) => {
   }
 };
 
+
+// modal fucntionality
 const loadPlantDetail = async (id) => {
   const url = `https://openapi.programming-hero.com/api/plant/${id}`;
   const res = await fetch(url);
@@ -139,59 +152,56 @@ const showPlants = (plants) => {
   addCartButtons();
 };
 
-const cartList = document.getElementById("cart-list");
-const cartTotal = document.getElementById("cart-total");
-
+//cart section functionality
 let cart = [];
 
-
-const updateCart = () => {
-  cartList.innerHTML = "";
-  let total = 0;
-
-  cart.forEach((item, index) => {
-    const itemTotal = item.price * item.quantity;
-    total += itemTotal;
-
-    cartList.innerHTML += `
-      <li class="mb-2 p-2 border-2 border-none bg-[#F0FDF4] rounded-lg">
-        <div class="font-medium">${item.name}</div>
-        <div class="flex justify-between items-center text-sm text-gray-500 gap-2">
-          <span class="mt-1"><i class="fa-solid fa-bangladeshi-taka-sign"></i>${item.price}</span>
-          <span class="ml-2 mt-1">x${item.quantity}</span>
-          <span class="flex items-center cursor-pointer text-gray-500 ml-[10px] mb-4" onclick="removeFromCart(${index})"><i class="fa-solid fa-x"></i></span>
-        </div>
-      </li>
-    `;
-  });
-
-  cartTotal.innerHTML = `<i class="fa-solid fa-bangladeshi-taka-sign"></i>${total}`;
-};
-
-
 const addToCart = (plant) => {
-  const existing = cart.find((item) => item.id === plant.id);
+const existing = cart.find((item) => item.id === plant.id);
 
   if (existing) {
-    existing.quantity += 1;
+    existing.quantity++;
   } else {
-    cart.push({
-      id: plant.id,
-      name: plant.name,
-      price: parseFloat(plant.price),
-      quantity: 1,
-    });
+    cart.push({ ...plant, quantity: 1 });
   }
 
   updateCart();
 };
 
+const updateCart = () => {
+  const cartList = document.getElementById("cart-list");
+  const cartTotal = document.getElementById("cart-total");
+  const cartQuantity = document.getElementById("cart-quantity");
+
+  cartList.innerHTML = "";
+  let total = 0;
+
+  cart.forEach((item, index) => {
+    const li = document.createElement("li");
+    li.className =
+      "flex justify-between items-center mb-2 bg-[#F0FDF4] p-2 rounded";
+    li.innerHTML = `
+      <div>
+        <div class="font-medium">${item.name}</div>
+        <div class="text-sm text-gray-500">
+          <i class="fa-solid fa-bangladeshi-taka-sign"></i>${item.price} x${item.quantity}
+        </div>
+      </div>
+      <button class="text-gray-700 cursor-pointer" onclick="removeFromCart(${index})">
+        <i class="fa-solid fa-x"></i>
+      </button>
+    `;
+    cartList.appendChild(li);
+    total += item.price * item.quantity;
+  });
+
+  cartTotal.innerHTML = `<i class="fa-solid fa-bangladeshi-taka-sign"></i>${total}`;
+  cartQuantity.textContent = cart.reduce((sum, i) => sum + i.quantity, 0);
+};
 
 const removeFromCart = (index) => {
   cart.splice(index, 1);
   updateCart();
 };
-
 
 const addCartButtons = () => {
   allPlants.forEach((plant) => {
@@ -202,6 +212,13 @@ const addCartButtons = () => {
   });
 };
 
+const btnClear = document.getElementById("btn-clear");
+if (btnClear) {
+  btnClear.addEventListener("click", () => {
+    cart = [];
+    updateCart();
+  });
+}
 
 loadCategory();
 loadPlants();
